@@ -1,0 +1,37 @@
+{
+    // 启用保存时自动格式化
+    "editor.formatOnSave": true,
+    // 保存时自动整理 import（走 isort）
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "always"
+    },
+    // 使用 black 作为格式化工具
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    // isort 配置
+    "isort.args": [
+        "--profile",
+        "black"
+    ],
+    "black-formatter.args": [
+        "--line-length",
+        "80"
+    ],
+    // 启用 pylint 检查
+    "pylint.args": [
+        "--max-line-length=80"
+    ],
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./test",
+        "-p",
+        "*test.py"
+    ],
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestArgs": [
+        "test"
+    ],
+}
