@@ -2,32 +2,14 @@
 
 <p align="center">
 一个用于在 <b>Plex</b> 删除媒体后，自动清理 <b>MoviePilot</b> 和 <b>qBittorrent</b> 中对应任务 / 资源的轻量工具。<br/>
-“删库不留种，空间更干净。”
-</p>
-
-<p align="center">
-<a href="#快速开始">快速开始</a> ·
-<a href="#特性">特性</a> ·
-<a href="#环境变量">环境变量</a> ·
-<a href="#本地开发">本地开发</a> ·
-<a href="#目录结构">目录结构</a> ·
-<a href="#常见问题">常见问题</a> ·
-<a href="#license">License</a>
 </p>
 
 ---
 
 ## 简介
-MediaJanitor 监听（或轮询）Plex 媒体目录的删除事件，识别被删除的剧集 / 电影对应的下载任务，并在 MoviePilot 与 qBittorrent 中执行关联清理（移除任务 / 种子，可选同时删除文件），帮助你保持存储与下载任务列表的整洁。
+MediaJanitor 监听 Plex 媒体目录的删除事件，识别被删除的剧集 / 电影对应的下载任务，并在 MoviePilot 与 qBittorrent 中执行关联清理（移除任务 / 种子，可选同时删除文件），帮助你保持存储与下载任务列表的整洁。
 
-> 自用项目，不保证通用性与绝对稳定；欢迎 Issue / PR 改进。
-
-## 特性
-- 监控 Plex 媒体目录删除
-- 自动调用 MoviePilot API 删除对应任务（支持源 / 目的删除开关）
-- 自动调用 qBittorrent 删除种子（可扩展更多客户端）
-- 统一配置目录：/config
-- 轻量部署（单一容器，无数据库依赖）
+> 自用项目，不保证通用性与绝对稳定
 
 ## 快速开始
 
@@ -88,26 +70,6 @@ docker logs -f mediajanitor
 | QBITTORRENT_BASE_URL | qBittorrent WebUI 地址 | 否 | http://localhost:8080 |
 | QBITTORRENT_USER / QBITTORRENT_PASSWORD | qBittorrent 登录 | 否 | admin / admin |
 
-## 本地开发
-```bash
-git clone <repo>
-cd MediaJanitor
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python -m app.main
-```
-
-## 目录结构
-```
-app/
-  clients/        # API / 客户端封装 (MoviePilot / qBittorrent ...)
-  common/         # 通用配置、日志、常量
-  monitor/        # 监控实现 (inotify 等)
-  server/         # 对外服务 / 监控协调入口
-tests/            # 简单测试
-Dockerfile
-```
 
 ## 常见问题
 1. 没有触发删除？
@@ -118,11 +80,4 @@ Dockerfile
 3. qBittorrent 未找到对应种子？
    - 文件命名不一致；可考虑后续加入哈希映射策略。
 
-## 协议说明
-本项目采用 MIT 协议开源，详见下方 License 部分。使用者需自行承担使用风险。
-
-## License
-MIT © 2025 hidka
-
 ---
-如果它对你有帮助，欢迎 Star 支持。
